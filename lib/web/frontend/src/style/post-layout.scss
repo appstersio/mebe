@@ -1,0 +1,25 @@
+.post {
+  header {
+    border-bottom: 1px solid lighten($accent-background, 50%);
+  }
+
+  h1 {
+    margin: 20px 0 10px;
+  }
+
+  .post-meta {
+    margin: 0 0 3px;
+
+    color: lighten($base-text, 30%);
+    font-style: italic;
+    font-size: 90%;
+
+    a {
+      display: inline-block;
+      padding: 2px;
+      color: $accent-background;
+      background-color: $accent-link;
+      border-radius: 2px;
+    }
+  }
+}

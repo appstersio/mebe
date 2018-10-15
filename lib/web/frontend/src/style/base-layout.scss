@@ -1,0 +1,100 @@
+// Base layout of the blog
+
+$layout-padding: 20px;
+
+html {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template: 'hd' 'mn' 1fr 'ft' / auto;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+
+  @media #{$md} {
+    grid-template: 'hd  mn'
+                   'hd  ft'
+                  / 1fr 3fr;
+  }
+
+  // Blog header that also works as a sidebar on big screens
+  >header {
+    grid-area: hd;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+
+    padding: $layout-padding;
+    background-color: $accent-background;
+
+    a {
+      color: $accent-link;
+
+      $active-color: darken($accent-link, 5%);
+
+      &:hover h1 {
+        color: $active-color;
+      }
+
+      &:visited {
+        color: $active-color;
+      }
+    }
+
+    h1 {
+      color: $blog-name-color;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 2.1em;
+      margin: 20px 0 0;
+    }
+
+    nav#menunav {
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+
+        li {
+          display: inline-block;
+          border: 2px solid $accent-link;
+          padding: 3px 5px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+
+  // Footer after all blog posts
+  >footer {
+    grid-area: ft;
+
+    padding: $layout-padding;
+    max-width: $content-max-width;
+
+    text-align: center;
+
+    @media #{$sm} {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      >p {
+        flex: 1;
+        margin: 0;
+      }
+    }
+  }
+
+  // Main blog post area
+  >main {
+    grid-area: mn;
+
+    padding: $layout-padding;
+    max-width: $content-max-width;
+  }
+}

@@ -1,0 +1,3 @@
+<%= raw(for post <- posts do %>
+  <%= Mebe2.Web.Views.Post.html(post, true) %>
+<% end) %>

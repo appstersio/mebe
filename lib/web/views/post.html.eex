@@ -1,0 +1,35 @@
+<article class="post">
+  <%= raw(if multi do %>
+    <a href="<%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_post_path(post) %>">
+  <% end) %>
+  
+  <h1><%= post.title %></h1>
+  
+  <%= raw(if multi do %></a><% end) %>
+
+  <p class="post-meta">
+    Posted on <%= if post.time_given do format_datetime(post.datetime) else format_date(post.datetime) end %>.
+  </p>
+  <p class="post-meta post-meta-tags">
+    <%= raw(for tag <- post.tags do %>
+      <a
+        href="<%= Mebe2.get_conf(:absolute_url) %>/tags/<%= tag %>"
+        class="post-tag"
+      >
+        <%= tag %>
+      </a>
+    <% end) %>
+  </p>
+
+  <%= raw(if multi && not is_nil(post.short_content) do %>
+    <%= raw(post.short_content) %>
+  <% else %>
+    <%= raw(post.content) %>
+  <% end) %>
+
+  <%=
+    raw(if not multi && Mebe2.get_conf(:disqus_comments) do
+      Mebe2.Web.Views.Comments.html(post.title)
+    end)
+  %>
+</article>

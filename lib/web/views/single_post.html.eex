@@ -1,0 +1,1 @@
+<%= Mebe2.Web.Views.Post.html(post, false) %>

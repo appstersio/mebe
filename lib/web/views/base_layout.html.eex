@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title><%= Mebe2.get_conf(:blog_name) %></title>
+</head>
+<body>
+  <header>
+    <a href="<%= Mebe2.get_conf(:absolute_url) %>">
+      <h1><%= Mebe2.get_conf(:blog_name) %></h1>
+      <nav id="menunav">
+        <ul>
+          <%= raw(for menuitem <- Mebe2.Engine.DB.get_menu() do %>
+            <li>
+              <a href="<%= Mebe2.get_conf(:absolute_url) %><%= menuitem.slug %>">
+                <%= menuitem.title %>
+              </a>
+            </li>
+          <% end) %>
+        </ul>
+      </nav>
+    </a>
+  </header>
+  <main>
+    <%= __content__ %>
+  </main>
+  <footer>
+    <p>
+      © <%= Mebe2.get_conf(:blog_author) %>
+    </p>
+    <p>
+      <a href="https://blog.nytsoi.net/mebe" target="_blank">
+        Powered by Elixir + Raxx + Mebe2
+      </a>
+    </p>
+    <p>
+      Rendered in: <%= Mebe2.Web.Middleware.RequestTime.get() %>
+    </p>
+  </footer>
+  <script src="/app.js"></script>
+  <%= raw(Mebe2.get_conf(:extra_html)) %>
+</body>
+</html>

@@ -1,0 +1,44 @@
+// Reasonable estimate for the size of the scrollbar
+$scrollbar-width: 30px;
+
+// Custom sizes for media queries
+$small: 480px;
+$medium: 768px;
+$large: 960px;
+$extra-large: 1100px;
+
+// Custom media queries
+$sm: '(min-width: #{$small})';
+$md: '(min-width: #{$medium})';
+$lg: '(min-width: #{$large})';
+$xl: '(min-width: #{$extra-large})';
+
+//
+// Color Palette
+
+$background-color: #fff;
+
+// Accent color for differentiating special elements or layout "pop"
+$accent-text: #fcfcfe;
+$accent-headings: $accent-text;
+$accent-background: #3d4f5d;
+$accent-link: lighten(#becacd, 15%);
+$accent-link-visited: $accent-link;
+$blog-name-color: #3d92c9;
+
+// Basic colors, the usual colors where others aren't appropriate
+$base-text: #000;
+$base-headings: $base-text;
+$base-background: $background-color;
+$base-link: lighten($accent-background, 10%);
+$base-link-visited: $base-link;
+
+//
+// Layout
+
+// Max width of content column
+$content-max-width: 1000px;
+
+// Min padding to edges of screen that should be maintained
+$min-edge-padding: 10px;
+
