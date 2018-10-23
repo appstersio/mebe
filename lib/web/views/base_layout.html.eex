@@ -34,7 +34,7 @@
       </a>
     </p>
     <p>
-      Rendered in: <%= Mebe2.Web.Middleware.RequestTime.get() %>
+      <%= inspect(self()) %><span id="request-timer"></span>
     </p>
   </footer>
   <script src="/app.js"></script>
