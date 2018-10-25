@@ -15,7 +15,10 @@ let format_time time = match float_of_int (int_of_string time) with
 
 let get_formatted cookie_name =
   let t, u = format_time (get_cookie_value cookie_name) in
-    {j| · Rendered in $t $u|j}
+    let rounded_t = match t with
+      | r when float_of_int (int_of_float r) == t -> Js_float.toFixedWithPrecision t ~digits:0
+      | _ -> Js_float.toFixedWithPrecision t ~digits:2 in
+        {j| · Rendered in $rounded_t $u|j}
 
 let set_timer_value () =
   render_timer_text get_formatted "mebe2-request-timer"
