@@ -3,7 +3,6 @@ defmodule Mebe2.Web.Routes.NotFound do
 
   @impl Raxx.Server
   def handle_request(_req, _state) do
-    response(404)
-    |> Mebe2.Web.Views.NotFound.render()
+    Mebe2.Web.Routes.Utils.render_404()
   end
 end

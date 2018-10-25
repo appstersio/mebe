@@ -13,7 +13,7 @@
   <p class="post-meta post-meta-tags">
     <%= raw(for tag <- post.tags do %>
       <a
-        href="<%= Mebe2.get_conf(:absolute_url) %>/tags/<%= tag %>"
+        href="<%= Mebe2.get_conf(:absolute_url) %>/tag/<%= tag %>"
         class="post-tag"
       >
         <%= tag %>

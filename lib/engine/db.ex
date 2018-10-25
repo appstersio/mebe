@@ -159,33 +159,33 @@ defmodule Mebe2.Engine.DB do
   end
 
   @spec get_reg_posts(integer(), integer()) :: [Models.Post.t()]
-  def get_reg_posts(first, last) do
-    get_post_list(@post_table, [{:"$1", [], [:"$_"]}], first, last)
+  def get_reg_posts(first, limit) do
+    get_post_list(@post_table, [{:"$1", [], [:"$_"]}], first, limit)
   end
 
   @spec get_tag_posts(String.t(), integer(), integer()) :: [Models.Post.t()]
-  def get_tag_posts(tag, first, last) do
-    get_post_list(@tag_table, [{{{tag, :_, :_, :_, :_}, :"$1"}, [], [:"$_"]}], first, last)
+  def get_tag_posts(tag, first, limit) do
+    get_post_list(@tag_table, [{{{tag, :_, :_, :_, :_}, :"$1"}, [], [:"$_"]}], first, limit)
   end
 
   @spec get_author_posts(String.t(), integer(), integer()) :: [Models.Post.t()]
-  def get_author_posts(author_slug, first, last) do
+  def get_author_posts(author_slug, first, limit) do
     get_post_list(
       @author_table,
       [{{{author_slug, :_, :_, :_, :_}, :"$1"}, [], [:"$_"]}],
       first,
-      last
+      limit
     )
   end
 
   @spec get_year_posts(integer(), integer(), integer()) :: [Models.Post.t()]
-  def get_year_posts(year, first, last) do
-    get_post_list(@post_table, [{{{year, :_, :_, :_}, :"$1"}, [], [:"$_"]}], first, last)
+  def get_year_posts(year, first, limit) do
+    get_post_list(@post_table, [{{{year, :_, :_, :_}, :"$1"}, [], [:"$_"]}], first, limit)
   end
 
   @spec get_month_posts(integer(), integer(), integer(), integer()) :: [Models.Post.t()]
-  def get_month_posts(year, month, first, last) do
-    get_post_list(@post_table, [{{{year, month, :_, :_}, :"$1"}, [], [:"$_"]}], first, last)
+  def get_month_posts(year, month, first, limit) do
+    get_post_list(@post_table, [{{{year, month, :_, :_}, :"$1"}, [], [:"$_"]}], first, limit)
   end
 
   @spec get_page(String.t()) :: Models.Page.t() | nil
@@ -234,8 +234,8 @@ defmodule Mebe2.Engine.DB do
 
   # Combine error handling of different post listing functions
   @spec get_post_list(atom, [tuple], integer, integer) :: [Models.Post.t()]
-  defp get_post_list(table, matchspec, first, last) do
-    case :ets.select_reverse(table, matchspec, first + last) do
+  defp get_post_list(table, matchspec, first, limit) do
+    case :ets.select_reverse(table, matchspec, first + limit) do
       :"$end_of_table" ->
         []
 

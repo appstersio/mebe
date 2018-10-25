@@ -3,7 +3,7 @@ defmodule Mebe2.Web.Routes.Post do
   alias Mebe2.Engine.{DB, Models}
 
   @impl Raxx.Server
-  def handle_request(%Raxx.Request{path: [y_str, m_str, d_str, slug]} = req, state) do
+  def handle_request(%Raxx.Request{path: [y_str, m_str, d_str, slug]} = _req, _state) do
     with {:year, {year, ""}} <- {:year, Integer.parse(y_str)},
          {:month, {month, ""}} <- {:month, Integer.parse(m_str)},
          {:day, {day, ""}} <- {:day, Integer.parse(d_str)},
@@ -11,7 +11,7 @@ defmodule Mebe2.Web.Routes.Post do
       response(200)
       |> Mebe2.Web.Views.SinglePost.render(post)
     else
-      _ -> Mebe2.Web.Routes.NotFound.handle_request(req, state)
+      _ -> Mebe2.Web.Routes.Utils.render_404()
     end
   end
 end

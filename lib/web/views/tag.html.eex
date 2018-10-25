@@ -1,0 +1,5 @@
+<div class="viewing-info">
+  Viewing posts for tag <em><%= tag %></em>.
+</div>
+
+<%= Mebe2.Web.Views.PostList.html(posts) %>
