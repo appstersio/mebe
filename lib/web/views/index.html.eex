@@ -1,1 +1,3 @@
-<%= Mebe2.Web.Views.PostList.html(posts) %>
+<%=
+  Mebe2.Web.Views.PostList.html(posts, total, page, &("/p/#{&1}"))
+%>

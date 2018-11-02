@@ -2,4 +2,4 @@
   Viewing posts for tag <em><%= tag %></em>.
 </div>
 
-<%= Mebe2.Web.Views.PostList.html(posts) %>
+<%= Mebe2.Web.Views.PostList.html(posts, total, page, &("/tag/#{tag}/p/#{&1}")) %>

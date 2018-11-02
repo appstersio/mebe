@@ -28,24 +28,28 @@ defmodule Mebe2.Web.Routes.Utils do
   end
 
   @doc """
-  Render a set of posts on the given page. `page` is a string from the URL path, `post_getter` is
-  a function that gets the range of posts to get and returns a list of posts, and `renderer` is a
-  function that renders the given list of posts using the given response.
+  Render a set of posts on the given page.
+
+  - `page` is a string from the URL path.
+  - `post_getter` isa function that gets the range of posts to load and returns a tuple where the
+    first element is the list of found posts, and the second element is the amount of all posts
+    that are in the DB with these conditions.
+  - `renderer` is a function that renders the content. Its arguments are the response to use,
+    the list of posts to render, the total amount of posts for pagination, and the current page
+    number.
   """
   @spec render_posts(
           String.t(),
-          (integer, integer -> [Post.t()]),
-          (Raxx.Response.t(), [Post.t()] -> Raxx.Response.t())
+          (integer, integer -> {[Post.t()], integer}),
+          (Raxx.Response.t(), [Post.t()], integer, integer -> Raxx.Response.t())
         ) :: Raxx.Response.t()
   def render_posts(page \\ "1", post_getter, renderer) do
-    case parse_page_number(page) do
-      :error ->
-        render_404()
-
-      n ->
-        {first, limit} = Mebe2.Web.Routes.Utils.get_post_range(n)
-        posts = post_getter.(first, limit)
-        Raxx.response(200) |> renderer.(posts)
+    with n when is_integer(n) <- parse_page_number(page),
+         {first, limit} = Mebe2.Web.Routes.Utils.get_post_range(n),
+         {[_ | _] = posts, total} <- post_getter.(first, limit) do
+      Raxx.response(200) |> renderer.(posts, total, n)
+    else
+      _ -> render_404()
     end
   end
 
