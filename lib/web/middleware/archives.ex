@@ -1,7 +1,8 @@
 defmodule Mebe2.Web.Middleware.Archives do
   require Logger
 
-  @archives_key :mebe2_archives
+  @month_archives_key :mebe2_month_archives
+  @tag_archives_key :mebe2_tag_archives
 
   defmacro __using__(_opts) do
     quote do
@@ -28,15 +29,26 @@ defmodule Mebe2.Web.Middleware.Archives do
   @spec put_archives() :: :ok
   def put_archives() do
     months = Mebe2.Engine.DB.get_all_months()
-    Process.put(@archives_key, months)
+    Process.put(@month_archives_key, months)
+
+    tags = Mebe2.Engine.DB.get_all_tags()
+    Process.put(@tag_archives_key, tags)
     :ok
   end
 
   @doc """
   Get list of tuples {year, month} that have at least one post.
   """
-  @spec get_archives() :: [{integer, integer}]
-  def get_archives() do
-    Process.get(@archives_key, [])
+  @spec get_month_archives() :: [{integer, integer}]
+  def get_month_archives() do
+    Process.get(@month_archives_key, [])
+  end
+
+  @doc """
+  Get map of tags (keys) and their post amounts (values).
+  """
+  @spec get_tag_archives() :: %{optional(String.t()) => integer}
+  def get_tag_archives() do
+    Process.get(@tag_archives_key, %{})
   end
 end

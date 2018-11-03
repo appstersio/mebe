@@ -30,11 +30,14 @@
       </nav>
     </a>
   </header>
+
   <main>
     <%= __content__ %>
   </main>
 
-  <%= Mebe2.Web.Views.Archives.html() %>
+  <div class="sidebar">
+    <%= Mebe2.Web.Views.Archives.html() %>
+  </div>
 
   <footer>
     <p>

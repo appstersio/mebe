@@ -13,9 +13,23 @@ defmodule Mebe2.Web.Views.Utils do
       ...> )
       "/2010/08/09/foo-bar"
   """
+  @spec get_post_path(Mebe2.Engine.Models.Post.t()) :: String.t()
   def get_post_path(%Mebe2.Engine.Models.Post{} = post) do
     dstr = Calendar.Strftime.strftime!(post.datetime, "%Y/%m/%d")
     "/#{dstr}/#{post.slug}"
+  end
+
+  @doc """
+  Get the relative path to a given tag.
+
+  ## Examples
+
+      iex> Mebe2.Web.Views.Utils.get_tag_path("foo")
+      "/tag/foo"
+  """
+  @spec get_tag_path(String.t()) :: String.t()
+  def get_tag_path(tag) do
+    "/tag/#{tag}"
   end
 
   @doc """

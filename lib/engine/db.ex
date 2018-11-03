@@ -228,6 +228,22 @@ defmodule Mebe2.Engine.DB do
     |> Enum.uniq()
   end
 
+  @doc """
+  Get a map of tags and their post counts in the system.
+  """
+  @spec get_all_tags() :: %{optional(String.t()) => integer}
+  def get_all_tags() do
+    ms =
+      fun do
+        {{tag, _, _, _, _}, _} -> tag
+      end
+
+    :ets.select(@tag_table, ms)
+    |> Enum.reduce(%{}, fn tag, acc ->
+      Map.update(acc, tag, 1, fn n -> n + 1 end)
+    end)
+  end
+
   @spec get_page(String.t()) :: Models.Page.t() | nil
   def get_page(slug) do
     case :ets.match_object(@page_table, {slug, :"$1"}) do

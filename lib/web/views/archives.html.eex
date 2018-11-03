@@ -1,5 +1,5 @@
 <nav class="archives" aria-labelledby="archives-heading">
-  <%= raw(with [_|_] = years <- get_archives() do %>
+  <%= raw(with [_|_] = years <- get_month_archives() do %>
     <h3 id="archives-heading">Archives</h3>
     <ul class="archives-year-list">
       <%= raw(for {year, months} <- years do %>
@@ -20,5 +20,19 @@
         </li>
       <% end) %>
     </ul>
+  <% end) %>
+
+  <%= raw(with {max, tags} <- get_tags() do %>
+    <div class="archives-tags">
+      <%= raw(for {tag, amount} <- tags do %>
+        <a
+          href="<%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_tag_path(tag) %>"
+          class="archives-tag"
+          style="font-size: <%= Float.round((amount / max * 100) / 1.25 + 25) |> trunc() %>%;"
+        >
+          <%= tag %>
+        </a>
+      <% end) %>
+    </div>
   <% end) %>
 </nav>
