@@ -69,7 +69,7 @@ defmodule Mebe2.Engine.Parser do
 
         order = format_order(order)
 
-        split_content = String.split(content, ~R/<!--\s*SPLIT\s*-->/u)
+        split_content = Regex.split(~R/<!--\s*SPLIT\s*-->/u, content)
 
         date_erl = date_to_int_tuple({year, month, day})
         date = Date.from_erl!(date_erl)
