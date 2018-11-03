@@ -161,19 +161,34 @@ defmodule Mebe2.Engine.DB do
 
   @spec get_reg_posts(integer(), integer()) :: [Models.Post.t()]
   def get_reg_posts(first, limit) do
-    get_post_list(@post_table, [{:"$1", [], [:"$_"]}], first, limit)
+    ms =
+      fun do
+        {_key, post} -> post
+      end
+
+    get_post_list(@post_table, ms, first, limit)
   end
 
   @spec get_tag_posts(String.t(), integer(), integer()) :: [Models.Post.t()]
   def get_tag_posts(tag, first, limit) do
-    get_post_list(@tag_table, [{{{tag, :_, :_, :_, :_}, :"$1"}, [], [:"$_"]}], first, limit)
+    ms =
+      fun do
+        {{^tag, _, _, _, _}, post} -> post
+      end
+
+    get_post_list(@tag_table, ms, first, limit)
   end
 
   @spec get_author_posts(String.t(), integer(), integer()) :: [Models.Post.t()]
   def get_author_posts(author_slug, first, limit) do
+    ms =
+      fun do
+        {{^author_slug, _, _, _, _}, post} -> post
+      end
+
     get_post_list(
       @author_table,
-      [{{{author_slug, :_, :_, :_, :_}, :"$1"}, [], [:"$_"]}],
+      ms,
       first,
       limit
     )
@@ -181,12 +196,22 @@ defmodule Mebe2.Engine.DB do
 
   @spec get_year_posts(integer(), integer(), integer()) :: [Models.Post.t()]
   def get_year_posts(year, first, limit) do
-    get_post_list(@post_table, [{{{year, :_, :_, :_}, :"$1"}, [], [:"$_"]}], first, limit)
+    ms =
+      fun do
+        {{^year, _, _, _}, post} -> post
+      end
+
+    get_post_list(@post_table, ms, first, limit)
   end
 
   @spec get_month_posts(integer(), integer(), integer(), integer()) :: [Models.Post.t()]
   def get_month_posts(year, month, first, limit) do
-    get_post_list(@post_table, [{{{year, month, :_, :_}, :"$1"}, [], [:"$_"]}], first, limit)
+    ms =
+      fun do
+        {{^year, ^month, _, _}, post} -> post
+      end
+
+    get_post_list(@post_table, ms, first, limit)
   end
 
   @doc """
@@ -256,14 +281,8 @@ defmodule Mebe2.Engine.DB do
         []
 
       {result, _} ->
-        Enum.split(result, first) |> elem(1) |> ets_to_data()
+        Enum.split(result, first) |> elem(1)
     end
-  end
-
-  # Remove key from data returned from ETS
-  @spec ets_to_data([{any, any}]) :: any
-  defp ets_to_data(data) do
-    for {_, actual} <- data, do: actual
   end
 
   # Format menu results (convert [{slug, %MenuItem{}}] to %MenuItem{})
