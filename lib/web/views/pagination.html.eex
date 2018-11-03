@@ -3,7 +3,7 @@
     <%= link(path_generator, page - 1, page == 1, "«") %>
 
     <%= raw(for p <- 1..(total_pages(total)) do %>
-      <%= link(path_generator, p, p == page) %>
+      <%= link(path_generator, p, p == page, (if p == page, do: "[#{p}]", else: "#{p}")) %>
     <% end) %>
 
     <%= link(path_generator, page + 1, page >= total_pages(total), "»") %>
