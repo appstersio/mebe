@@ -21,30 +21,6 @@ defmodule Mebe2.Web.Middleware.RequestTime do
         super(head, config)
         |> unquote(__MODULE__).process_response()
       end
-
-      @impl Raxx.Server
-      def handle_data(data, config) do
-        unquote(__MODULE__).put_response_timer()
-
-        super(data, config)
-        |> unquote(__MODULE__).process_response()
-      end
-
-      @impl Raxx.Server
-      def handle_tail(tail, config) do
-        unquote(__MODULE__).put_response_timer()
-
-        super(tail, config)
-        |> unquote(__MODULE__).process_response()
-      end
-
-      @impl Raxx.Server
-      def handle_info(message, config) do
-        unquote(__MODULE__).put_response_timer()
-
-        super(message, config)
-        |> unquote(__MODULE__).process_response()
-      end
     end
   end
 

@@ -1,0 +1,24 @@
+<nav class="archives" aria-labelledby="archives-heading">
+  <%= raw(with [_|_] = years <- get_archives() do %>
+    <h2 id="archives-heading">Archives</h2>
+    <ul class="archives-year-list">
+      <%= raw(for {year, months} <- years do %>
+        <li>
+          <a href="<%= Mebe2.Web.Views.Utils.year_path_generator(year).(1) %>">
+            <%= year %>
+          </a>
+
+          <ul class="archives-month-list">
+            <%= raw(for month <- months do %>
+              <li>
+                <a href="<%= Mebe2.Web.Views.Utils.month_path_generator(year, month).(1) %>">
+                  <%= Mebe2.Web.Views.Utils.format_month(year, month) %>
+                </a>
+              </li>
+            <% end) %>
+          </ul>
+        </li>
+      <% end) %>
+    </ul>
+  <% end) %>
+</nav>

@@ -1,0 +1,12 @@
+<div class="viewing-info">
+  Viewing posts for <em><%= Mebe2.Web.Views.Utils.format_month(year, month) %></em>.
+</div>
+
+<%=
+  Mebe2.Web.Views.PostList.html(
+    posts,
+    total,
+    page,
+    Mebe2.Web.Views.Utils.month_path_generator(year, month)
+  )
+%>

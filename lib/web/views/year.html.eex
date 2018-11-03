@@ -1,0 +1,12 @@
+<div class="viewing-info">
+  Viewing posts for <em><%= year %></em>.
+</div>
+
+<%=
+  Mebe2.Web.Views.PostList.html(
+    posts,
+    total,
+    page,
+    Mebe2.Web.Views.Utils.year_path_generator(year)
+  )
+%>

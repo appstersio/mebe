@@ -10,6 +10,7 @@ defmodule Mebe2.Engine.SlugUtils do
 
   Nil is returned as is.
   """
+  @spec slugify(String.t() | nil) :: String.t() | nil
   def slugify(nil), do: nil
 
   def slugify(value) do
@@ -19,6 +20,7 @@ defmodule Mebe2.Engine.SlugUtils do
   @doc """
   Get the author name related to this slug from the DB.
   """
+  @spec unslugify_author(String.t()) :: String.t()
   def unslugify_author(slug) do
     DB.get_author_name(slug)
   end

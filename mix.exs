@@ -27,6 +27,7 @@ defmodule Mebe2.MixProject do
       {:ace, "~> 0.17.1"},
       {:calendar, "~> 0.17.4"},
       {:slugger, "~> 0.3.0"},
+      {:ex2ms, "~> 1.5.0"},
       {:mbu, "~> 3.0.0", runtime: false},
       {:exsync, "~> 0.2.3", only: :dev}
     ]

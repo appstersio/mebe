@@ -1,0 +1,24 @@
+nav.archives {
+  background-color: $accent-background;
+  color: $accent-text;
+
+  #archives-heading {
+    margin-top: 0;
+  }
+
+  a {
+    color: $accent-link;
+  }
+
+  ul {
+    list-style-position: inside;
+
+    &.archives-year-list {
+      padding-left: 0;
+    }
+
+    &.archives-month-list {
+      padding-left: 20px;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 defmodule Mebe2.Engine.DB do
   require Logger
+  import Ex2ms
   alias Mebe2.Engine.{Utils, SlugUtils, Models}
 
   alias Calendar.DateTime
@@ -188,6 +189,20 @@ defmodule Mebe2.Engine.DB do
     get_post_list(@post_table, [{{{year, month, :_, :_}, :"$1"}, [], [:"$_"]}], first, limit)
   end
 
+  @doc """
+  Get all months stored in the DB as a list of {year, month} tuples.
+  """
+  @spec get_all_months() :: [{integer, integer}]
+  def get_all_months() do
+    ms =
+      fun do
+        {{year, month, _, _}, _} -> {year, month}
+      end
+
+    :ets.select_reverse(@post_table, ms)
+    |> Enum.uniq()
+  end
+
   @spec get_page(String.t()) :: Models.Page.t() | nil
   def get_page(slug) do
     case :ets.match_object(@page_table, {slug, :"$1"}) do
@@ -209,7 +224,7 @@ defmodule Mebe2.Engine.DB do
     get_count(:all, :all)
   end
 
-  @spec get_count(atom, :all | integer | String.t()) :: integer()
+  @spec get_count(atom, :all | integer | String.t() | {integer, integer}) :: integer()
   def get_count(type, key) do
     get_meta(type, key, 0)
   end
@@ -224,7 +239,8 @@ defmodule Mebe2.Engine.DB do
     :ets.insert(@meta_table, {{type, key}, value})
   end
 
-  @spec get_meta(atom, :all | integer | String.t(), integer | String.t()) :: integer | String.t()
+  @spec get_meta(atom, :all | integer | String.t() | {integer, integer}, integer | String.t()) ::
+          integer | String.t()
   defp get_meta(type, key, default) do
     case :ets.match_object(@meta_table, {{type, key}, :"$1"}) do
       [{{_, _}, value}] -> value

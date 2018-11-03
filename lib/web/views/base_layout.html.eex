@@ -24,6 +24,9 @@
   <main>
     <%= __content__ %>
   </main>
+
+  <%= Mebe2.Web.Views.Archives.html() %>
+
   <footer>
     <p>
       © <%= Mebe2.get_conf(:blog_author) %>
