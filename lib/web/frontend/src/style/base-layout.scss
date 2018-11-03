@@ -14,10 +14,10 @@ body {
   height: 100%;
 
   @media #{$md} {
-    grid-template: 'hd  mn' 200px
-                   'nav mn'
-                   'nav ft'
-                  / 1fr 3fr;
+    grid-template: 'hd    mn' 200px
+                   'nav   mn'
+                   'nav   ft'
+                  / 325px auto;
   }
 
   // Blog header that also works as a sidebar on big screens
