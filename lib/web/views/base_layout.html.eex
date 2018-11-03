@@ -3,6 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <title><%= Mebe2.get_conf(:blog_name) %></title>
+
+  <%= raw(if Mebe2.get_conf(:enable_feeds) do %>
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS feed"
+      href="<%= Mebe2.get_conf(:absolute_url) %>/feed"
+    />
+  <% end) %>
 </head>
 <body>
   <header>

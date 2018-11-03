@@ -1,0 +1,28 @@
+<%= raw(for post <- posts do %>
+  <item>
+    <title>
+      <![CDATA[<%= raw(post.title) %>]]>
+    </title>
+
+    <%= raw(if Mebe2.get_conf(:multi_author_mode) do %>
+      <dc:creator><%= Mebe2.Engine.Utils.get_author(post) %></dc:creator>
+    <% end) %>
+
+    <link><%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_post_path(post) %></link>
+    <guid><%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_post_path(post) %></guid>
+    <description>
+      <![CDATA[
+        <%= raw(if Mebe2.get_conf(:show_full_content) do %>
+          <%= raw(post.content) %>
+        <% else %>
+          <%= raw(post.short_content) %>
+        <% end) %>
+
+        <a href="<%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_post_path(post) %>">
+          Read more…
+        </a>
+      ]]>
+    </description>
+    <pubDate><%= format_time(post.datetime) %></pubDate>
+  </item>
+<% end) %>
