@@ -4,8 +4,6 @@ defmodule Mebe2 do
   """
 
   @conf_datatypes %{
-    multi_author_mode: :bool,
-    use_default_author: :bool,
     force_read_more: :bool,
     enable_feeds: :bool,
     feeds_full_content: :bool,

@@ -1,7 +1,7 @@
 defmodule Mebe2.Engine.DB do
   require Logger
   import Ex2ms
-  alias Mebe2.Engine.{Utils, SlugUtils, Models}
+  alias Mebe2.Engine.Models
 
   alias Calendar.DateTime
 
@@ -25,9 +25,6 @@ defmodule Mebe2.Engine.DB do
   # Table for storing posts with tag as first element of key
   @tag_table :mebe2_tags
 
-  # Table for storing posts by specific authors
-  @author_table :mebe2_authors
-
   # Table for storing menu data
   @menu_table :mebe2_menu
 
@@ -41,10 +38,6 @@ defmodule Mebe2.Engine.DB do
       :ets.new(@single_post_table, [:named_table, :set, :protected, read_concurrency: true])
       :ets.new(@tag_table, [:named_table, :ordered_set, :protected, read_concurrency: true])
       :ets.new(@menu_table, [:named_table, :ordered_set, :protected, read_concurrency: true])
-
-      if Mebe2.get_conf(:multi_author_mode) do
-        :ets.new(@author_table, [:named_table, :ordered_set, :protected, read_concurrency: true])
-      end
     end
 
     :ok
@@ -93,20 +86,6 @@ defmodule Mebe2.Engine.DB do
 
     :ets.insert(@post_table, ordered_posts)
     :ets.insert(@single_post_table, single_posts)
-
-    if Mebe2.get_conf(:multi_author_mode) do
-      author_posts =
-        Enum.filter(posts, fn post -> Map.has_key?(post.extra_headers, "author") end)
-        |> Enum.map(fn post ->
-          {{year, month, day}, _} = DateTime.to_erl(post.datetime)
-
-          author_slug = Utils.get_author(post) |> SlugUtils.slugify()
-          {{author_slug, year, month, day, post.order}, post}
-        end)
-
-      :ets.insert(@author_table, author_posts)
-    end
-
     :ok
   end
 
@@ -126,29 +105,6 @@ defmodule Mebe2.Engine.DB do
       end)
 
     :ets.insert(@tag_table, tag_posts)
-  end
-
-  @spec insert_author_posts(%{optional(String.t()) => Models.Post.t()}) :: true
-  def insert_author_posts(authors) do
-    author_posts =
-      Enum.reduce(Map.keys(authors), [], fn author_slug, acc ->
-        Enum.reduce(authors[author_slug], acc, fn post, inner_acc ->
-          {{year, month, day}, _} = DateTime.to_erl(post.datetime)
-          [{{author_slug, year, month, day, post.order}, post} | inner_acc]
-        end)
-      end)
-
-    :ets.insert(@author_table, author_posts)
-  end
-
-  @spec insert_author_names(%{optional(String.t()) => String.t()}) :: true
-  def insert_author_names(author_names_map) do
-    author_names =
-      Enum.reduce(Map.keys(author_names_map), [], fn author_slug, acc ->
-        [{{:author_name, author_slug}, author_names_map[author_slug]} | acc]
-      end)
-
-    :ets.insert(@meta_table, author_names)
   end
 
   @spec get_menu() :: [Models.MenuItem.t()]
@@ -177,21 +133,6 @@ defmodule Mebe2.Engine.DB do
       end
 
     get_post_list(@tag_table, ms, first, limit)
-  end
-
-  @spec get_author_posts(String.t(), integer(), integer()) :: [Models.Post.t()]
-  def get_author_posts(author_slug, first, limit) do
-    ms =
-      fun do
-        {{^author_slug, _, _, _, _}, post} -> post
-      end
-
-    get_post_list(
-      @author_table,
-      ms,
-      first,
-      limit
-    )
   end
 
   @spec get_year_posts(integer(), integer(), integer()) :: [Models.Post.t()]
@@ -268,11 +209,6 @@ defmodule Mebe2.Engine.DB do
   @spec get_count(atom, :all | integer | String.t() | {integer, integer}) :: integer()
   def get_count(type, key) do
     get_meta(type, key, 0)
-  end
-
-  @spec get_author_name(String.t()) :: String.t()
-  def get_author_name(author_slug) do
-    get_meta(:author_name, author_slug, author_slug)
   end
 
   @spec insert_meta(atom, :all | integer | String.t(), integer | String.t()) :: true

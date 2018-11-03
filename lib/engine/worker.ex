@@ -45,8 +45,6 @@ defmodule Mebe2.Engine.Worker do
       pages: pages,
       posts: posts,
       tags: tags,
-      authors: authors,
-      author_names: author_names,
       years: years,
       months: months
     } = Crawler.crawl(data_path)
@@ -63,15 +61,6 @@ defmodule Mebe2.Engine.Worker do
 
     DB.insert_tag_posts(tags)
     Enum.each(Map.keys(tags), fn tag -> DB.insert_count(:tag, tag, Enum.count(tags[tag])) end)
-
-    if Mebe2.get_conf(:multi_author_mode) do
-      DB.insert_author_posts(authors)
-      DB.insert_author_names(author_names)
-
-      Enum.each(Map.keys(authors), fn author ->
-        DB.insert_count(:author, author, Enum.count(authors[author]))
-      end)
-    end
 
     # For years and months, only insert the counts (the data can be fetched from main posts table)
     Enum.each(Map.keys(years), fn year ->

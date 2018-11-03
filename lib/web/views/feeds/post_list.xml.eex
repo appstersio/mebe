@@ -4,9 +4,7 @@
       <![CDATA[<%= raw(post.title) %>]]>
     </title>
 
-    <%= raw(if Mebe2.get_conf(:multi_author_mode) do %>
-      <dc:creator><%= Mebe2.Engine.Utils.get_author(post) %></dc:creator>
-    <% end) %>
+    <dc:creator><%= Mebe2.get_conf(:blog_author) %></dc:creator>
 
     <link><%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_post_path(post) %></link>
     <guid><%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_post_path(post) %></guid>

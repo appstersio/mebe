@@ -5,7 +5,7 @@ defmodule Mebe2.Engine.Crawler do
   """
   require Logger
 
-  alias Mebe2.Engine.{Parser, Utils, SlugUtils}
+  alias Mebe2.Engine.Parser
   alias Mebe2.Engine.Models.{Page, Post}
 
   def crawl(path) do
@@ -51,9 +51,7 @@ defmodule Mebe2.Engine.Crawler do
         posts: [],
         years: %{},
         months: %{},
-        tags: %{},
-        authors: %{},
-        author_names: %{}
+        tags: %{}
       },
       fn pagedata, acc ->
         case pagedata do
@@ -73,8 +71,6 @@ defmodule Mebe2.Engine.Crawler do
                 Map.put(tagmap, tag, [pagedata | posts])
               end)
 
-            {authors, author_names} = form_authors(acc, pagedata)
-
             year_posts = [pagedata | Map.get(acc.years, year, [])]
             month_posts = [pagedata | Map.get(acc.months, {year, month}, [])]
 
@@ -83,31 +79,10 @@ defmodule Mebe2.Engine.Crawler do
               | posts: [pagedata | acc.posts],
                 years: Map.put(acc.years, year, year_posts),
                 months: Map.put(acc.months, {year, month}, month_posts),
-                tags: tags,
-                authors: authors,
-                author_names: author_names
+                tags: tags
             }
         end
       end
     )
-  end
-
-  defp form_authors(datalist, pagedata) do
-    multi_author_mode = Mebe2.get_conf(:multi_author_mode)
-    do_form_authors(multi_author_mode, datalist, pagedata)
-  end
-
-  defp do_form_authors(false, _, _), do: {%{}, %{}}
-
-  defp do_form_authors(true, %{authors: authors, author_names: author_names}, pagedata) do
-    author_name = Utils.get_author(pagedata)
-    author_slug = SlugUtils.slugify(author_name)
-    author_posts = [pagedata | Map.get(authors, author_slug, [])]
-    authors = Map.put(authors, author_slug, author_posts)
-
-    # Authors end up with the name that was in the post with the first matching slug
-    author_names = Map.put_new(author_names, author_slug, author_name)
-
-    {authors, author_names}
   end
 end

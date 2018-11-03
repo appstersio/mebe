@@ -32,10 +32,6 @@ config :mebe_2,
   blog_author: "Author McAuthor",
   # Absolute URL to the site, including protocol, no trailing slash
   absolute_url: "http://localhost:2124",
-  # Set to true to show author header from posts, if available (blog_author will be used as default)
-  multi_author_mode: false,
-  # If multi author mode is on, use blog_author as default author (if this is false, no author will be set if post has no author header)
-  use_default_author: true,
   # Default timezone to use for posts with time data
   time_default_tz: "Europe/Helsinki",
   # Force "Read more…" text to display even if there is no more content

@@ -23,7 +23,6 @@
   "ranch": {:hex, :ranch, "1.5.0", "f04166f456790fee2ac1aa05a02745cc75783c2bfb26d39faf6aefc9a3d3a58a", [:rebar3], [], "hexpm"},
   "raxx": {:hex, :raxx, "0.16.1", "3737b61f198755138bb2c8c61ed22dc06f9c0cf3218320189ddcda02da91d94a", [:mix], [{:cookie, "~> 0.1.0", [hex: :cookie, repo: "hexpm", optional: false]}, {:eex_html, "~> 0.1.1", [hex: :eex_html, repo: "hexpm", optional: false]}], "hexpm"},
   "raxx_static": {:hex, :raxx_static, "0.6.1", "8b48254fc3d1b8b1e473b7c307fbba0ae767c60482754ce823c664544c85d729", [:mix], [{:mime, "~> 1.1", [hex: :mime, repo: "hexpm", optional: false]}, {:raxx, "~> 0.15.2", [hex: :raxx, repo: "hexpm", optional: false]}], "hexpm"},
-  "slugger": {:hex, :slugger, "0.3.0", "efc667ab99eee19a48913ccf3d038b1fb9f165fa4fbf093be898b8099e61b6ed", [:mix], [], "hexpm"},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.1", "28a4d65b7f59893bc2c7de786dec1e1555bd742d336043fe644ae956c3497fbe", [:make, :rebar], [], "hexpm"},
   "tzdata": {:hex, :tzdata, "0.5.19", "7962a3997bf06303b7d1772988ede22260f3dae1bf897408ebdac2b4435f4e6a", [:mix], [{:hackney, "~> 1.0", [hex: :hackney, repo: "hexpm", optional: false]}], "hexpm"},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.3.1", "a1f612a7b512638634a603c8f401892afbf99b8ce93a45041f8aaca99cadb85e", [:rebar3], [], "hexpm"},
