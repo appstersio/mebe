@@ -1,6 +1,6 @@
 <nav class="archives" aria-labelledby="archives-heading">
   <%= raw(with [_|_] = years <- get_archives() do %>
-    <h2 id="archives-heading">Archives</h2>
+    <h3 id="archives-heading">Archives</h3>
     <ul class="archives-year-list">
       <%= raw(for {year, months} <- years do %>
         <li>
