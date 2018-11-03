@@ -17,6 +17,13 @@ body {
     grid-template: 'hd    mn' 200px
                    'nav   mn'
                    'nav   ft'
+                  / 250px auto;
+  }
+
+  @media #{$lg} {
+    grid-template: 'hd    mn' 200px
+                   'nav   mn'
+                   'nav   ft'
                   / 325px auto;
   }
 
