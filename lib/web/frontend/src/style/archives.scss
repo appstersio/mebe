@@ -11,6 +11,7 @@ nav.archives {
     list-style-position: inside;
 
     &.archives-year-list {
+      clear: both;
       padding-left: 0;
     }
 
@@ -28,5 +29,9 @@ nav.archives {
       float: left;
       margin: 0 2px;
     }
+  }
+
+  .archives-tags + ul.archives-year-list {
+    padding-top: 20px;
   }
 }
