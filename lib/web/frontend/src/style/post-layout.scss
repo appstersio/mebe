@@ -40,4 +40,19 @@
       height: 500px;
     }
   }
+
+  figure.thumbnail {
+    max-width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    padding: 0;
+
+    img {
+      max-width: 100%;
+    }
+
+    figcaption {
+      font-style: italic;
+    }
+  }
 }
