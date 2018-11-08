@@ -12,7 +12,7 @@ defmodule Mebe2.Application do
       {:module, ExSync = mod} ->
         mod.start()
 
-      {:error, :nofile} ->
+      {:error, _} ->
         :ok
     end
 
