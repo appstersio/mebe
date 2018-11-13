@@ -1,8 +1,8 @@
 defmodule Mebe2.Web.Routes.Post do
-  use Raxx.Server
+  use Raxx.SimpleServer
   alias Mebe2.Engine.{DB, Models}
 
-  @impl Raxx.Server
+  @impl Raxx.SimpleServer
   def handle_request(%Raxx.Request{path: [y_str, m_str, d_str, slug]} = _req, _state) do
     with {:year, {year, ""}} <- {:year, Integer.parse(y_str)},
          {:month, {month, ""}} <- {:month, Integer.parse(m_str)},

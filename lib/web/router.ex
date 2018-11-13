@@ -1,7 +1,9 @@
 defmodule Mebe2.Web.Router do
   use Ace.HTTP.Service, port: 2142, cleartext: true
+  use Raxx.Server
   use Raxx.Logger
   use Mebe2.Web.Middleware.RequestTime
+  use Raxx.Static, "../../priv/static"
   use Mebe2.Web.Middleware.Archives
   alias Mebe2.Web.Routes
 

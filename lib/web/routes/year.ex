@@ -1,8 +1,8 @@
 defmodule Mebe2.Web.Routes.Year do
-  use Raxx.Server
+  use Raxx.SimpleServer
   alias Mebe2.Web.Routes.Utils
 
-  @impl Raxx.Server
+  @impl Raxx.SimpleServer
   def handle_request(%Raxx.Request{path: ["archive", year_str, "p", page]} = _req, _state) do
     with {year, _} <- Integer.parse(year_str) do
       Utils.render_posts(
@@ -15,7 +15,7 @@ defmodule Mebe2.Web.Routes.Year do
     end
   end
 
-  @impl Raxx.Server
+  @impl Raxx.SimpleServer
   def handle_request(%Raxx.Request{path: ["archive", year_str, "feed"]} = _req, _state) do
     with {year, _} <- Integer.parse(year_str) do
       Utils.render_feed(&post_getter(year, &1, &2))
@@ -24,7 +24,7 @@ defmodule Mebe2.Web.Routes.Year do
     end
   end
 
-  @impl Raxx.Server
+  @impl Raxx.SimpleServer
   def handle_request(%Raxx.Request{path: ["archive", year_str]} = _req, _state) do
     with {year, _} <- Integer.parse(year_str) do
       Utils.render_posts(

@@ -1,16 +1,16 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "private": true,
   "scripts": {
     "clean": "bsb -clean-world",
-    "build": "bsb -make-world",
-    "watch": "bsb -make-world -w"
+    "build": "bsb -make-world && node fuse build"
   },
   "keywords": [
     "BuckleScript"
   ],
-  "author": "",
-  "license": "MIT",
+  "author": "Nicd",
+  "license": "",
   "devDependencies": {
     "bs-platform": "^4.0.5",
     "fuse-box": "^3.5.0",

@@ -1,8 +1,8 @@
 defmodule Mebe2.Web.Routes.Month do
-  use Raxx.Server
+  use Raxx.SimpleServer
   alias Mebe2.Web.Routes.Utils
 
-  @impl Raxx.Server
+  @impl Raxx.SimpleServer
   def handle_request(
         %Raxx.Request{path: ["archive", year_str, month_str, "p", page]} = _req,
         _state
@@ -19,7 +19,7 @@ defmodule Mebe2.Web.Routes.Month do
     end
   end
 
-  @impl Raxx.Server
+  @impl Raxx.SimpleServer
   def handle_request(%Raxx.Request{path: ["archive", year_str, month_str, "feed"]} = _req, _state) do
     with {year, _} <- Integer.parse(year_str),
          {month, _} <- Integer.parse(month_str) do
@@ -29,7 +29,7 @@ defmodule Mebe2.Web.Routes.Month do
     end
   end
 
-  @impl Raxx.Server
+  @impl Raxx.SimpleServer
   def handle_request(%Raxx.Request{path: ["archive", year_str, month_str]} = _req, _state) do
     with {year, _} <- Integer.parse(year_str),
          {month, _} <- Integer.parse(month_str) do
