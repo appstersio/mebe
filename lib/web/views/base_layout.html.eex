@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <title><%= Mebe2.get_conf(:blog_name) %></title>
 
-  <%= raw(if Mebe2.get_conf(:enable_feeds) do %>
+  <%= if Mebe2.get_conf(:enable_feeds) do %>
     <link
       rel="alternate"
       type="application/rss+xml"
       title="RSS feed"
       href="<%= Mebe2.get_conf(:absolute_url) %>/feed"
     />
-  <% end) %>
+  <% end %>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -20,13 +20,13 @@
       <h1><%= Mebe2.get_conf(:blog_name) %></h1>
       <nav id="menunav">
         <ul>
-          <%= raw(for menuitem <- Mebe2.Engine.DB.get_menu() do %>
+          <%= for menuitem <- Mebe2.Engine.DB.get_menu() do %>
             <li>
               <a href="<%= Mebe2.get_conf(:absolute_url) %><%= menuitem.slug %>">
                 <%= menuitem.title %>
               </a>
             </li>
-          <% end) %>
+          <% end %>
         </ul>
       </nav>
     </a>

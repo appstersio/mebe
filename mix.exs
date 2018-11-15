@@ -23,8 +23,9 @@ defmodule Mebe2.MixProject do
   defp deps do
     [
       {:earmark, "~> 1.2.5"},
-      {:raxx, "~> 0.17.1"},
+      {:raxx, "~> 0.17.2"},
       {:raxx_static, "~> 0.7.0"},
+      {:eex_html, "~> 0.2.0"},
       {:ace, "~> 0.18.0"},
       {:calendar, "~> 0.17.4"},
       {:ex2ms, "~> 1.5.0"},

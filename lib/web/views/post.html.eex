@@ -1,7 +1,7 @@
 <article class="post">
-  <%= raw(if multi do %>
+  <%= if multi do %>
     <a href="<%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_post_path(post) %>">
-  <% end) %>
+  <% end %>
   
   <h1><%= post.title %></h1>
   
@@ -11,29 +11,29 @@
     Posted on <%= if post.time_given do format_datetime(post.datetime) else format_date(post.datetime) end %>.
   </p>
   <p class="post-meta post-meta-tags">
-    <%= raw(for tag <- post.tags do %>
+    <%= for tag <- post.tags do %>
       <a
         href="<%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_tag_path(tag) %>"
         class="post-tag"
       >
         <%= tag %>
       </a>
-    <% end) %>
+    <% end %>
   </p>
 
-  <%= raw(if multi && post.has_more do %>
+  <%= if multi && post.has_more do %>
     <%= raw(post.short_content) %>
   <% else %>
     <%= raw(post.content) %>
-  <% end) %>
+  <% end %>
 
-  <%= raw(if multi && (post.has_more || Mebe2.get_conf(:force_read_more)) do %>
+  <%= if multi && (post.has_more || Mebe2.get_conf(:force_read_more)) do %>
     <a href="<%= Mebe2.Web.Views.Utils.get_post_path(post) %>">Read more…</a>
-  <% end) %>
+  <% end %>
 
   <%=
-    raw(if not multi && Mebe2.get_conf(:disqus_comments) do
+    if not multi && Mebe2.get_conf(:disqus_comments) do
       Mebe2.Web.Views.Comments.html(post.title)
-    end)
+    end
   %>
 </article>

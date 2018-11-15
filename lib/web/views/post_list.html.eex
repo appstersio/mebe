@@ -1,5 +1,5 @@
-<%= raw(for post <- posts do %>
+<%= for post <- posts do %>
   <%= Mebe2.Web.Views.Post.html(post, true) %>
-<% end) %>
+<% end %>
 
 <%= Mebe2.Web.Views.Pagination.html(total, page, path_generator) %>

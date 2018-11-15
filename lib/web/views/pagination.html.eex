@@ -1,11 +1,11 @@
-<%= raw(if total > ppp() do %>
+<%= if total > ppp() do %>
   <nav class="pagination">
     <%= link(path_generator, page - 1, page == 1, "«") %>
 
-    <%= raw(for p <- 1..(total_pages(total)) do %>
+    <%= for p <- 1..(total_pages(total)) do %>
       <%= link(path_generator, p, p == page, (if p == page, do: "[#{p}]", else: "#{p}")) %>
-    <% end) %>
+    <% end %>
 
     <%= link(path_generator, page + 1, page >= total_pages(total), "»") %>
   </nav>
-<% end) %>
+<% end %>

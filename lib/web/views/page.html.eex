@@ -4,8 +4,8 @@
   <%= raw(page.content) %>
 
   <%=
-    raw(if Mebe2.get_conf(:page_commenting) do
+    if Mebe2.get_conf(:page_commenting) do
       Mebe2.Web.Views.Comments.html(page.title)
-    end)
+    end
   %>
 </article>

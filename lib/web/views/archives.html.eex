@@ -1,9 +1,9 @@
 <nav class="archives" aria-labelledby="archives-heading">
   <h3 id="archives-heading">Archives</h3>
 
-  <%= raw(with {max, tags} <- get_tags() do %>
+  <%= with {max, tags} <- get_tags() do %>
     <div class="archives-tags">
-      <%= raw(for {tag, amount} <- tags do %>
+      <%= for {tag, amount} <- tags do %>
         <a
           href="<%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_tag_path(tag) %>"
           class="archives-tag"
@@ -11,29 +11,29 @@
         >
           <%= tag %>
         </a>
-      <% end) %>
+      <% end %>
     </div>
-  <% end) %>
+  <% end %>
 
-  <%= raw(with [_|_] = years <- get_month_archives() do %>
+  <%= with [_|_] = years <- get_month_archives() do %>
     <ul class="archives-year-list">
-      <%= raw(for {year, months} <- years do %>
+      <%= for {year, months} <- years do %>
         <li>
           <a href="<%= Mebe2.Web.Views.Utils.year_path_generator(year).(1) %>">
             <%= year %>
           </a>
 
           <ul class="archives-month-list">
-            <%= raw(for month <- months do %>
+            <%= for month <- months do %>
               <li>
                 <a href="<%= Mebe2.Web.Views.Utils.month_path_generator(year, month).(1) %>">
                   <%= Mebe2.Web.Views.Utils.format_month(year, month) %>
                 </a>
               </li>
-            <% end) %>
+            <% end %>
           </ul>
         </li>
-      <% end) %>
+      <% end %>
     </ul>
-  <% end) %>
+  <% end %>
 </nav>
