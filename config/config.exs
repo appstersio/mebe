@@ -62,6 +62,14 @@ if Mix.env() == :dev do
   config :exsync, :extensions, [".ex", ".eex"]
 end
 
+if Mix.env() == :prod do
+  config :logger,
+    level: :error,
+    compile_time_purge_matching: [
+      [level_lower_than: :error]
+    ]
+end
+
 # If you wish to compile in secret settings, use the following file. Note that the settings in
 # the file will be set at release generation time and cannot be changed later.
 if File.exists?("config/config.secret.exs") do
