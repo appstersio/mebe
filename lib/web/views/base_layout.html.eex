@@ -53,7 +53,7 @@
       <%= inspect(self()) %><span id="request-timer"></span>
     </p>
   </footer>
-  <script src="/app.js"></script>
+  <script src="<%= Mebe2.get_conf(:absolute_url) %>/app.js"></script>
   <%= raw(Mebe2.get_conf(:extra_html)) %>
 </body>
 </html>
