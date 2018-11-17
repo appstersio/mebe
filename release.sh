@@ -8,7 +8,7 @@ FRONTEND_PATH='lib/web/frontend'
 
 cd ${FRONTEND_PATH}
 
-bsb -make-world
+node_modules/.bin/bsb -make-world
 NODE_ENV=production node fuse build
 
 cd ${CURRENT_DIR}
