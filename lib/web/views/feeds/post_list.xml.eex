@@ -10,7 +10,7 @@
     <guid><%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_post_path(post) %></guid>
     <description>
       <![CDATA[
-        <%= if Mebe2.get_conf(:show_full_content) do %>
+        <%= if Mebe2.get_conf(:feeds_full_content) do %>
           <%= raw(post.content) %>
         <% else %>
           <%= raw(post.short_content) %>
