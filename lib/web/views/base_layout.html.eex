@@ -12,7 +12,7 @@
       href="<%= Mebe2.get_conf(:absolute_url) %>/feed"
     />
   <% end %>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="<%= Mebe2.get_conf(:absolute_urL) %>/styles.css" />
 </head>
 <body>
   <header>
