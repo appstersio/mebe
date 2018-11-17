@@ -10,6 +10,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -20,6 +21,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-BoldItalic.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -30,6 +32,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -40,6 +43,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-BlackItalic.ttf') format('truetype');
   font-weight: 900;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -50,6 +54,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-HairlineItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -60,6 +65,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -70,6 +76,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -80,6 +87,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -90,6 +98,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -100,6 +109,7 @@ $font-path: '../fonts/';
     url('#{$font-path}Lato-Hairline.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -110,6 +120,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-ExtraBoldItalic.ttf') format('truetype');
   font-weight: 800;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -120,6 +131,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-MediumItalic.ttf') format('truetype');
   font-weight: 500;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -130,6 +142,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -140,6 +153,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -150,6 +164,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-BoldItalic.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -160,6 +175,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-SemiBoldItalic.ttf') format('truetype');
   font-weight: 600;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -170,6 +186,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -180,6 +197,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -190,6 +208,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-Thin.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -200,6 +219,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-BlackItalic.ttf') format('truetype');
   font-weight: 900;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -210,6 +230,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -220,6 +241,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -230,6 +252,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-ThinItalic.ttf') format('truetype');
   font-weight: 100;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -240,6 +263,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-ExtraLightItalic.ttf') format('truetype');
   font-weight: 200;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -250,6 +274,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -260,6 +285,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-ExtraLight.ttf') format('truetype');
   font-weight: 200;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -270,6 +296,7 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -280,4 +307,5 @@ $font-path: '../fonts/';
     url('#{$font-path}FiraSans-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
