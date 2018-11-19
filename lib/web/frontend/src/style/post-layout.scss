@@ -23,6 +23,11 @@
     }
   }
 
+  pre[class*="language-"] {
+    // Code should not enlargen mobile layouts, so remove 40px for padding.
+    max-width: calc(100vw - 20px * 2);
+  }
+
   iframe.youtube {
     display: block;
     width: 100%;
