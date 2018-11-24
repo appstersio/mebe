@@ -28,10 +28,10 @@ defmodule Mebe2.Web.Middleware.Archives do
   """
   @spec put_archives() :: :ok
   def put_archives() do
-    months = Mebe2.Engine.DB.get_all_months()
+    months = Mebe2.Engine.DB.get_archives(:months)
     Process.put(@month_archives_key, months)
 
-    tags = Mebe2.Engine.DB.get_all_tags()
+    tags = Mebe2.Engine.DB.get_archives(:tags)
     Process.put(@tag_archives_key, tags)
     :ok
   end

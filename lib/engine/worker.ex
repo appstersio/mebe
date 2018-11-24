@@ -11,6 +11,7 @@ defmodule Mebe2.Engine.Worker do
     GenServer.start_link(__MODULE__, :ok, opts)
   end
 
+  @spec init(:ok) :: {:ok, nil}
   def init(:ok) do
     load_db()
     {:ok, nil}
@@ -21,17 +22,21 @@ defmodule Mebe2.Engine.Worker do
     {:reply, :ok, nil}
   end
 
+  @spec refresh_db() :: :ok
   def refresh_db() do
     Logger.info("Destroying database…")
-    DB.destroy()
+    :ok = DB.destroy()
     Logger.info("Reloading database…")
-    load_db()
+    :ok = load_db()
     Logger.info("Update done!")
+
+    :ok
   end
 
   @doc """
   Initialize the database by crawling the configured path and parsing data to the DB.
   """
+  @spec load_db() :: :ok
   def load_db() do
     data_path = Mebe2.get_conf(:data_path)
 
@@ -71,6 +76,11 @@ defmodule Mebe2.Engine.Worker do
       DB.insert_count(:month, month, Enum.count(months[month]))
     end)
 
+    DB.get_all_months() |> DB.insert_archives(:months)
+    DB.get_all_tags() |> DB.insert_archives(:tags)
+
     Logger.info("Posts loaded.")
+
+    :ok
   end
 end

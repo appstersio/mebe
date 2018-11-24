@@ -28,6 +28,9 @@ defmodule Mebe2.Engine.DB do
   # Table for storing menu data
   @menu_table :mebe2_menu
 
+  # Table for storing archives
+  @archives_table :mebe2_archives
+
   @spec init() :: :ok
   def init() do
     # Only create tables if they don't exist already
@@ -38,6 +41,7 @@ defmodule Mebe2.Engine.DB do
       :ets.new(@single_post_table, [:named_table, :set, :protected, read_concurrency: true])
       :ets.new(@tag_table, [:named_table, :ordered_set, :protected, read_concurrency: true])
       :ets.new(@menu_table, [:named_table, :ordered_set, :protected, read_concurrency: true])
+      :ets.new(@archives_table, [:named_table, :set, :protected, read_concurrency: true])
     end
 
     :ok
@@ -50,6 +54,7 @@ defmodule Mebe2.Engine.DB do
     :ets.delete_all_objects(@post_table)
     :ets.delete_all_objects(@single_post_table)
     :ets.delete_all_objects(@tag_table)
+    :ets.delete_all_objects(@archives_table)
     :ok
   end
 
@@ -105,6 +110,15 @@ defmodule Mebe2.Engine.DB do
       end)
 
     :ets.insert(@tag_table, tag_posts)
+  end
+
+  @doc """
+  Insert archive data into the archive table.
+  """
+  @spec insert_archives([{integer, integer}], :months) :: true
+  @spec insert_archives(%{optional(String.t()) => integer}, :tags) :: true
+  def insert_archives(data, type) when is_atom(type) do
+    :ets.insert(@archives_table, {type, data})
   end
 
   @spec get_menu() :: [Models.MenuItem.t()]
@@ -183,6 +197,19 @@ defmodule Mebe2.Engine.DB do
     |> Enum.reduce(%{}, fn tag, acc ->
       Map.update(acc, tag, 1, fn n -> n + 1 end)
     end)
+  end
+
+  @doc """
+  Get data from archives with the given type.
+  """
+  @spec get_archives(:months) :: [{integer, integer}]
+  @spec get_archives(:tags) :: %{optional(String.t()) => integer}
+  def get_archives(type) do
+    case :ets.match_object(@archives_table, {type, :"$1"}) do
+      [{_, data}] -> data
+      _ when type == :months -> []
+      _ when type == :tags -> %{}
+    end
   end
 
   @spec get_page(String.t()) :: Models.Page.t() | nil

@@ -1,6 +1,7 @@
 defmodule Mebe2.Web.Routes.Post do
   use Raxx.SimpleServer
   alias Mebe2.Engine.{DB, Models}
+  alias Mebe2.Web.Routes.Utils
 
   @impl Raxx.SimpleServer
   def handle_request(%Raxx.Request{path: [y_str, m_str, d_str, slug]} = _req, _state) do
@@ -8,10 +9,10 @@ defmodule Mebe2.Web.Routes.Post do
          {:month, {month, ""}} <- {:month, Integer.parse(m_str)},
          {:day, {day, ""}} <- {:day, Integer.parse(d_str)},
          {:post, %Models.Post{} = post} <- {:post, DB.get_post(year, month, day, slug)} do
-      response(200)
+      Utils.html_response(200)
       |> Mebe2.Web.Views.SinglePost.render(post)
     else
-      _ -> Mebe2.Web.Routes.Utils.render_404()
+      _ -> Utils.render_404()
     end
   end
 end
