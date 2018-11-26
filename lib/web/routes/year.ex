@@ -43,5 +43,5 @@ defmodule Mebe2.Web.Routes.Year do
     }
 
   defp renderer(year, response, posts, total, page),
-    do: Mebe2.Web.Views.Year.render(response, year, posts, total, page)
+    do: Utils.render_template(response, Mebe2.Web.Views.Year, [year, posts, total, page])
 end

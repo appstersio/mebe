@@ -68,7 +68,7 @@ defmodule Mebe2.Web.Routes.Utils do
       {posts, _} = post_getter.(first, limit)
 
       rss_response(200)
-      |> Mebe2.Web.Views.Feeds.PostList.render(posts)
+      |> render_template(Mebe2.Web.Views.Feeds.PostList, [posts])
     else
       _ -> render_404()
     end
@@ -80,7 +80,7 @@ defmodule Mebe2.Web.Routes.Utils do
   @spec render_404() :: Raxx.Response.t()
   def render_404() do
     html_response(404)
-    |> Mebe2.Web.Views.NotFound.render()
+    |> render_template(Mebe2.Web.Views.NotFound)
   end
 
   @doc """
@@ -89,8 +89,7 @@ defmodule Mebe2.Web.Routes.Utils do
   @spec html_response(integer) :: Raxx.Response.t()
   def html_response(code) when is_integer(code) do
     Raxx.response(code)
-    # TODO: Fix these when Raxx doesn't crash on setting content type when using views
-    # |> Raxx.set_header("content-type", "text/html; charset=utf-8")
+    |> Raxx.set_header("content-type", "text/html; charset=utf-8")
   end
 
   @doc """
@@ -99,6 +98,14 @@ defmodule Mebe2.Web.Routes.Utils do
   @spec rss_response(integer) :: Raxx.Response.t()
   def rss_response(code) when is_integer(code) do
     Raxx.response(code)
-    # |> Raxx.set_header("content-type", "application/xml+rss; charset=utf-8")
+    |> Raxx.set_header("content-type", "application/xml+rss; charset=utf-8")
+  end
+
+  @doc """
+  Render a template with the given args into the response.
+  """
+  @spec render_template(Raxx.Response.t(), module, [any]) :: Raxx.Response.t()
+  def render_template(response, template, args \\ []) do
+    Raxx.set_body(response, apply(template, :html, args).data)
   end
 end

@@ -28,5 +28,5 @@ defmodule Mebe2.Web.Routes.Tag do
     }
 
   defp renderer(tag, response, posts, total, page),
-    do: Mebe2.Web.Views.Tag.render(response, tag, posts, total, page)
+    do: Utils.render_template(response, Mebe2.Web.Views.Tag, [tag, posts, total, page])
 end

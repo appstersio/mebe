@@ -7,7 +7,7 @@ defmodule Mebe2.Web.Routes.Page do
   def handle_request(%Raxx.Request{path: [slug]} = _req, _state) do
     with {:page, %Models.Page{} = page} <- {:page, DB.get_page(slug)} do
       Utils.html_response(200)
-      |> Mebe2.Web.Views.Page.render(page)
+      |> Utils.render_template(Mebe2.Web.Views.Page, [page])
     else
       _ -> Utils.render_404()
     end

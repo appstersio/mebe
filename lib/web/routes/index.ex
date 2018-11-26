@@ -5,7 +5,7 @@ defmodule Mebe2.Web.Routes.Index do
 
   @impl Raxx.SimpleServer
   def handle_request(%Raxx.Request{path: ["p", page]} = _req, _state) do
-    Utils.render_posts(page, &post_getter/2, &Index.render/4)
+    Utils.render_posts(page, &post_getter/2, &renderer/4)
   end
 
   @impl Raxx.SimpleServer
@@ -15,7 +15,11 @@ defmodule Mebe2.Web.Routes.Index do
 
   @impl Raxx.SimpleServer
   def handle_request(%Raxx.Request{} = _req, _state) do
-    Utils.render_posts(&post_getter/2, &Index.render/4)
+    Utils.render_posts(&post_getter/2, &renderer/4)
+  end
+
+  defp renderer(response, posts, total, page) do
+    Utils.render_template(response, Index, [posts, total, page])
   end
 
   defp post_getter(first, limit),
