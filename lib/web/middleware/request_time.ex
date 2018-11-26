@@ -48,12 +48,7 @@ defmodule Mebe2.Web.Middleware.RequestTime do
     old_time = Process.get(@timer_key)
     diff = get_time() - old_time
 
-    %Raxx.Response{
-      response
-      | headers: [
-          {"set-cookie", "#{@timer_cookie_name}=#{diff}; Max-Age=60"}
-        ]
-    }
+    Raxx.set_header(response, "set-cookie", "#{@timer_cookie_name}=#{diff}; Max-Age=60")
   end
 
   defp get_time(), do: :erlang.monotonic_time(:micro_seconds)
