@@ -25,16 +25,18 @@ defmodule Mebe2.Web.Views.Pagination do
   Get pagination link with path generator for the path, current page, and should the link be
   disabled.
   """
-  @spec link((integer -> String.t()), integer, boolean(), String.t()) :: EExHTML.Safe.t()
-  def link(path_gen, page, is_disabled, page_str) do
+  @spec link((integer -> String.t()), integer, boolean(), String.t(), String.t()) ::
+          EExHTML.Safe.t()
+  def link(path_gen, page, is_disabled, page_str, label_str) do
     ~E"""
       <div
         class="pagination-link <%= if is_disabled, do: ~s(pagination-disabled) %>"
-        aria-disabled="<%= if is_disabled, do: ~s(true), else: ~s(false) %>"
+        aria-hidden="<%= if is_disabled, do: ~s(true), else: ~s(false) %>"
       >
         <%= raw(if not is_disabled do %>
           <a
             href="<%= path(path_gen, page) %>"
+            aria-label="<%= label_str %>"
           >
             <%= page_str %>
           </a>

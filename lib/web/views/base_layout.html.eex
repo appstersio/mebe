@@ -18,20 +18,20 @@
 </head>
 <body>
   <header>
-    <a href="<%= Mebe2.get_conf(:absolute_url) %>">
+    <a aria-label="Click to open main page." href="<%= Mebe2.get_conf(:absolute_url) %>">
       <h1><%= Mebe2.get_conf(:blog_name) %></h1>
-      <nav id="menunav">
-        <ul>
-          <%= for menuitem <- Mebe2.Engine.DB.get_menu() do %>
-            <li>
-              <a href="<%= Mebe2.get_conf(:absolute_url) %><%= menuitem.slug %>">
-                <%= menuitem.title %>
-              </a>
-            </li>
-          <% end %>
-        </ul>
-      </nav>
     </a>
+    <nav id="menunav" aria-label="List of pages in blog.">
+      <ul>
+        <%= for menuitem <- Mebe2.Engine.DB.get_menu() do %>
+          <li>
+            <a href="<%= Mebe2.get_conf(:absolute_url) %><%= menuitem.slug %>">
+              <%= menuitem.title %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
   </header>
 
   <main>

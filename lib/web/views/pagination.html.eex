@@ -1,11 +1,11 @@
 <%= if total > ppp() do %>
-  <nav class="pagination">
-    <%= link(path_generator, page - 1, page == 1, "«") %>
+  <nav class="pagination" aria-label="Page selection (you are on page <%= page %>)">
+    <%= link(path_generator, page - 1, page == 1, "«", "Go to previous page") %>
 
     <%= for p <- 1..(total_pages(total)) do %>
-      <%= link(path_generator, p, p == page, (if p == page, do: "[#{p}]", else: "#{p}")) %>
+      <%= link(path_generator, p, p == page, (if p == page, do: "[#{p}]", else: "#{p}"), "Go to page #{p}") %>
     <% end %>
 
-    <%= link(path_generator, page + 1, page >= total_pages(total), "»") %>
+    <%= link(path_generator, page + 1, page >= total_pages(total), "»", "Go to next page") %>
   </nav>
 <% end %>

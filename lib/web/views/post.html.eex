@@ -10,7 +10,8 @@
   <p class="post-meta">
     Posted on <%= if post.time_given do format_datetime(post.datetime) else format_date(post.datetime) end %>.
   </p>
-  <p class="post-meta post-meta-tags">
+ <nav aria-label="Post tags">
+   <p class="post-meta post-meta-tags">
     <%= for tag <- post.tags do %>
       <a
         href="<%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_tag_path(tag) %>"
@@ -20,6 +21,7 @@
       </a>
     <% end %>
   </p>
+ </nav>
 
   <%= if multi && post.has_more do %>
     <%= raw(post.short_content) %>
