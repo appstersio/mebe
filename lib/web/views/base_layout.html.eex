@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title><%= Mebe2.get_conf(:blog_name) %></title>
+  <title><%= render_title(__ENV__.module, binding()) %><%= Mebe2.get_conf(:blog_name) %></title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
