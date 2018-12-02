@@ -1,4 +1,6 @@
 .post {
+  max-width: 100%;
+
   header {
     border-bottom: 1px solid lighten($accent-background, 50%);
   }
@@ -26,10 +28,15 @@
   pre[class*="language-"] {
     // Code should not enlargen mobile layouts, so remove 40px for padding.
     max-width: calc(100vw - 20px * 2);
+
+    @media #{$md} {
+      max-width: 100%;
+    }
   }
 
   iframe.youtube {
     display: block;
+    max-width: 100%;
     width: 100%;
     height: 200px;
 
@@ -46,7 +53,11 @@
     }
   }
 
-  figure.thumbnail {
+  img {
+    max-width: 100%;
+  }
+
+  figure {
     max-width: 100%;
     text-align: center;
     margin: 20px 0;

@@ -115,5 +115,11 @@ body {
 
     padding: $layout-padding;
     max-width: $content-max-width;
+
+    // For some reason this fixes our code blocks in the posts, otherwise they will overflow the
+    // container
+    // Found on: https://stackoverflow.com/questions/45468633/pre-tag-causing-page-to-scroll-horizontally-in-css-grid#comment77898323_45468633
+    // WTF?!
+    min-width: 0;
   }
 }
