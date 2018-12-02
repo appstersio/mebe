@@ -8,6 +8,8 @@ FRONTEND_PATH='lib/web/frontend'
 
 cd ${FRONTEND_PATH}
 
+yarn install
+
 node_modules/.bin/bsb -make-world
 NODE_ENV=production node fuse build
 
