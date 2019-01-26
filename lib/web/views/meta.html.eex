@@ -27,7 +27,7 @@
   <meta itemprop="datePublished" content="<%= timestamp(module, vars) %>" />
 
   <%# Large image must be at least 280x150px %>
-  <meta name="twitter:image:src" content="<%= image(module, vars) %>" />
+  <meta name="twitter:image" content="<%= image(module, vars) %>" />
   <meta property="og:image" content="<%= image(module, vars) %>" />
   <meta itemprop="image" content="<%= image(module, vars) %>" />
 <% end %>
