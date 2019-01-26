@@ -20,6 +20,21 @@ defmodule Mebe2.Web.Views.Utils do
   end
 
   @doc """
+  Get the relative path to a given page.
+
+  ## Examples
+
+      iex> Mebe2.Web.Views.Utils.get_page_path(
+      ...>   %Mebe2.Engine.Models.Page{slug: "foo-bar"}
+      ...> )
+      "/foo-bar"
+  """
+  @spec get_page_path(Mebe2.Engine.Models.Page.t()) :: String.t()
+  def get_page_path(%Mebe2.Engine.Models.Page{} = page) do
+    "/#{page.slug}"
+  end
+
+  @doc """
   Get the relative path to a given tag.
 
   ## Examples

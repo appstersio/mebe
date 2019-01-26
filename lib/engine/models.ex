@@ -4,10 +4,10 @@ defmodule Mebe2.Engine.Models do
   """
 
   defmodule PageData do
-    defstruct filename: nil,
-              title: nil,
+    defstruct filename: "",
+              title: "",
               headers: [],
-              content: nil
+              content: ""
 
     @type t :: %__MODULE__{
             filename: String.t(),

@@ -1,0 +1,37 @@
+<meta name="author" content="<%= Mebe2.get_conf(:blog_author) %>" />
+<meta name="description" content="<%= description(module, vars) %>" />
+
+<%# Schema.org markup for Google+ %>
+<meta itemprop="name" content="<%= render_title(module, vars) %>" />
+<meta itemprop="author" content="<%= Mebe2.get_conf(:blog_author) %>" />
+<meta itemprop="headline" content="<%= render_title(module, vars) %>" />
+<meta itemprop="description" content="<%= description(module, vars) %>" />
+
+<%# Twitter Card data %>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="<%= twitter_author() %>" />
+<meta name="twitter:title" content="<%= render_title(module, vars) %>" />
+<meta name="twitter:description" content="<%= description(module, vars) %>" />
+<meta name="twitter:creator" content="<%= twitter_author() %>" />
+
+<%# Open Graph data %>
+<meta property="og:title" content="<%= render_title(module, vars) %>" />
+<meta property="og:type" content="<%= og_type(module, vars) %>" />
+
+<meta property="og:description" content="<%= description(module, vars) %>" />
+<meta property="og:site_name" content="<%= Mebe2.get_conf(:blog_name) %>" />
+
+
+<%= if module == Mebe2.Web.Views.SinglePost do %>
+  <meta property="article:published_time" content="<%= timestamp(module, vars) %>" />
+  <meta itemprop="datePublished" content="<%= timestamp(module, vars) %>" />
+
+  <%# Large image must be at least 280x150px %>
+  <meta name="twitter:image:src" content="<%= image(module, vars) %>" />
+  <meta property="og:image" content="<%= image(module, vars) %>" />
+  <meta itemprop="image" content="<%= image(module, vars) %>" />
+<% end %>
+
+<%= if module in [Mebe2.Web.Views.SinglePost, Mebe2.Web.Views.Page] do %>
+  <meta property="og:url" content="<%= url(module, vars) %>" />
+<% end %>

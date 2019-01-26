@@ -18,10 +18,12 @@ defmodule Mebe2.Engine.Parser do
     |> format()
   end
 
+  @spec split_lines(String.t()) :: [String.t()]
   def split_lines(pagedata) do
     String.split(pagedata, ~R/\r?\n/)
   end
 
+  @spec parse_raw([String.t()], PageData.t(), :content | :headers | :title) :: PageData.t()
   def parse_raw(datalines, pagedata \\ %PageData{}, mode \\ :title)
 
   def parse_raw([title | rest], pagedata, :title) do
@@ -43,10 +45,12 @@ defmodule Mebe2.Engine.Parser do
     %{pagedata | content: Enum.join(content, "\n")}
   end
 
+  @spec render_content(PageData.t()) :: PageData.t()
   def render_content(pagedata) do
     %{pagedata | content: Earmark.as_html!(pagedata.content, @earmark_opts)}
   end
 
+  @spec format(PageData.t()) :: Page.t() | Post.t()
   def format(%PageData{
         filename: filename,
         title: title,

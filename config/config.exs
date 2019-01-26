@@ -30,6 +30,9 @@ config :mebe_2,
   # Basic blog information
   blog_name: "My awesome blog",
   blog_author: "Author McAuthor",
+  blog_description: "Description for SEO.",
+  # Twitter username of blog author (without @) or nil for none
+  blog_author_twitter: nil,
   # Absolute URL to the site, including protocol, no trailing slash
   absolute_url: "http://localhost:2124",
   # Default timezone to use for posts with time data

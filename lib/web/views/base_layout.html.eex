@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html itemscope itemtype="http://schema.org/<%= schema_type(__ENV__.module, binding()) %>">
 <head>
   <meta charset="utf-8" />
-  <title><%= render_title(__ENV__.module, binding()) %><%= Mebe2.get_conf(:blog_name) %></title>
+  <title><%= render_title(__ENV__.module, binding()) %></title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <%= Mebe2.Web.Views.Meta.html(__ENV__.module, binding()) %>
 
   <%= if Mebe2.get_conf(:enable_feeds) do %>
     <link
