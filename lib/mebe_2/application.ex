@@ -19,7 +19,7 @@ defmodule Mebe2.Application do
     # List all child processes to be supervised
     children = [
       Mebe2.Engine.Worker.child_spec(name: Mebe2.Engine.Worker),
-      {Mebe2.Web.Router, [[], [port: port]]}
+      {Mebe2.Web.Server, [port: port, cleartext: true]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

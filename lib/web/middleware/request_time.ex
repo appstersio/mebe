@@ -1,40 +1,35 @@
 defmodule Mebe2.Web.Middleware.RequestTime do
   require Logger
 
+  @behaviour Raxx.Middleware
+
   @timer_key :mebe2_request_started
   @timer_cookie_name "mebe2-request-timer"
 
-  defmacro __using__(_opts) do
-    quote do
-      @before_compile unquote(__MODULE__)
-    end
+  @impl true
+  def process_head(request, state, inner_server) do
+    put_response_timer()
+    {parts, inner_server} = Raxx.Server.handle_head(inner_server, request)
+    {parts, state, inner_server}
   end
 
-  defmacro __before_compile__(_env) do
-    quote do
-      defoverridable Raxx.Server
-
-      @impl Raxx.Server
-      def handle_head(head, config) do
-        unquote(__MODULE__).put_response_timer()
-
-        super(head, config)
-        |> unquote(__MODULE__).process_response()
-      end
-    end
+  @impl true
+  def process_tail(tail, state, inner_server) do
+    {parts, inner_server} = Raxx.Server.handle_tail(inner_server, tail)
+    parts = modify_response_parts(parts, state)
+    {parts, state, inner_server}
   end
 
-  @doc false
-  def process_response(response = %Raxx.Response{}) do
-    add_timer_cookie(response)
+  @impl true
+  def process_data(data, state, inner_server) do
+    {parts, inner_server} = Raxx.Server.handle_data(inner_server, data)
+    {parts, state, inner_server}
   end
 
-  def process_response({[response = %Raxx.Response{} | parts], state}) do
-    {[add_timer_cookie(response) | parts], state}
-  end
-
-  def process_response(reaction) do
-    reaction
+  @impl true
+  def process_info(info, state, inner_server) do
+    {parts, inner_server} = Raxx.Server.handle_info(inner_server, info)
+    {parts, state, inner_server}
   end
 
   @spec put_response_timer() :: :ok
@@ -43,8 +38,20 @@ defmodule Mebe2.Web.Middleware.RequestTime do
     :ok
   end
 
+  defp modify_response_parts(parts, :disengage) do
+    parts
+  end
+
+  defp modify_response_parts(parts, :engage) do
+    Enum.flat_map(parts, &do_handle_response_part(&1))
+  end
+
+  defp do_handle_response_part(response = %Raxx.Response{}) do
+    [add_timer_cookie(response)]
+  end
+
   @spec add_timer_cookie(Raxx.Response.t()) :: Raxx.Response.t()
-  def add_timer_cookie(%Raxx.Response{} = response) do
+  defp add_timer_cookie(%Raxx.Response{} = response) do
     old_time = Process.get(@timer_key)
     diff = get_time() - old_time
 

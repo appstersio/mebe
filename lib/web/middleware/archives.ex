@@ -1,26 +1,32 @@
 defmodule Mebe2.Web.Middleware.Archives do
-  require Logger
+  @behaviour Raxx.Middleware
 
   @month_archives_key :mebe2_month_archives
   @tag_archives_key :mebe2_tag_archives
 
-  defmacro __using__(_opts) do
-    quote do
-      @before_compile unquote(__MODULE__)
-    end
+  @impl true
+  def process_head(request, state, inner_server) do
+    put_archives()
+    {parts, inner_server} = Raxx.Server.handle_head(inner_server, request)
+    {parts, state, inner_server}
   end
 
-  defmacro __before_compile__(_env) do
-    quote do
-      defoverridable Raxx.Server
+  @impl true
+  def process_tail(tail, state, inner_server) do
+    {parts, inner_server} = Raxx.Server.handle_tail(inner_server, tail)
+    {parts, state, inner_server}
+  end
 
-      @impl Raxx.Server
-      def handle_head(head, config) do
-        unquote(__MODULE__).put_archives()
+  @impl true
+  def process_data(data, state, inner_server) do
+    {parts, inner_server} = Raxx.Server.handle_data(inner_server, data)
+    {parts, state, inner_server}
+  end
 
-        super(head, config)
-      end
-    end
+  @impl true
+  def process_info(info, state, inner_server) do
+    {parts, inner_server} = Raxx.Server.handle_info(inner_server, info)
+    {parts, state, inner_server}
   end
 
   @doc """

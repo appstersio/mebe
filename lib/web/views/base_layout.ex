@@ -1,5 +1,5 @@
 defmodule Mebe2.Web.Views.BaseLayout do
-  use Raxx.Layout,
+  use Raxx.View.Layout,
     layout: "base_layout.html.eex"
 
   alias Mebe2.Web.Views.SinglePost
