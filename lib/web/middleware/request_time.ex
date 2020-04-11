@@ -9,14 +9,14 @@ defmodule Mebe2.Web.Middleware.RequestTime do
   @impl true
   def process_head(request, state, inner_server) do
     put_response_timer()
-    {parts, inner_server} = Raxx.Server.handle_head(inner_server, request)
-    {parts, state, inner_server}
+    {[%Raxx.Response{} = resp], inner_server} = Raxx.Server.handle_head(inner_server, request)
+    resp = add_timer_cookie(resp)
+    {[resp], state, inner_server}
   end
 
   @impl true
   def process_tail(tail, state, inner_server) do
     {parts, inner_server} = Raxx.Server.handle_tail(inner_server, tail)
-    parts = modify_response_parts(parts, state)
     {parts, state, inner_server}
   end
 
@@ -36,18 +36,6 @@ defmodule Mebe2.Web.Middleware.RequestTime do
   def put_response_timer() do
     Process.put(@timer_key, get_time())
     :ok
-  end
-
-  defp modify_response_parts(parts, :disengage) do
-    parts
-  end
-
-  defp modify_response_parts(parts, :engage) do
-    Enum.flat_map(parts, &do_handle_response_part(&1))
-  end
-
-  defp do_handle_response_part(response = %Raxx.Response{}) do
-    [add_timer_cookie(response)]
   end
 
   @spec add_timer_cookie(Raxx.Response.t()) :: Raxx.Response.t()
