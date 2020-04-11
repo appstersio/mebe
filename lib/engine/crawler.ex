@@ -17,7 +17,7 @@ defmodule Mebe2.Engine.Crawler do
 
   def get_files(path) do
     path = path <> "/**/*.md"
-    Logger.info("Searching files using '#{path}' with cwd '#{System.cwd()}'")
+    Logger.info("Searching files using '#{path}' with cwd '#{File.cwd!()}'")
     files = Path.wildcard(path)
     Logger.info("Found files:")
 
