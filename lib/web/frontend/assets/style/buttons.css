@@ -1,0 +1,22 @@
+button {
+  border: var(--btn-border);
+  border-radius: var(--btn-border-radius);
+  padding: var(--btn-padding);
+
+  background-color: var(--background-color);
+  color: var(--accent-background);
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  background-color: var(--accent-link);
+}
+
+button:disabled {
+  background-color: var(--accent-link);
+  color: var(--disabled-color);
+  border-color: var(--disabled-color);
+}

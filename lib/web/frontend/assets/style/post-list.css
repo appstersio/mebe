@@ -1,0 +1,6 @@
+.viewing-info {
+  padding: 20px;
+  background-color: var(--viewing-info-background);
+  border-radius: 10px;
+  display: inline-block;
+}

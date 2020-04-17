@@ -1,0 +1,93 @@
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: calc(var(--text-size-factor) * 1rem);
+  line-height: 1.45;
+  color: var(--base-text);
+}
+
+p {
+  margin-bottom: 1.3rem;
+}
+
+p:first-child {
+  /* No top margin if paragraph is first element in container. */
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-headings);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: calc(var(--h-size-factor) * var(--h1-size));
+  margin-top: 0.5em;
+}
+
+h2 {
+  font-size: calc(var(--h-size-factor) * var(--h2-size));
+}
+
+h3 {
+  font-size: calc(var(--h-size-factor) * var(--h3-size));
+}
+
+h4 {
+  font-size: calc(var(--h-size-factor) * var(--h4-size));
+}
+
+h5 {
+  font-size: calc(var(--h-size-factor) * var(--h5-size));
+}
+
+h6 {
+  font-size: calc(var(--h-size-factor) * var(--h6-size));
+}
+
+small,
+.font-small {
+  font-size: 0.75em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+a {
+  color: var(--base-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--base-link-visited);
+}
+
+pre {
+  padding: 10px;
+}
+
+code, pre {
+  background-color: var(--code-background);
+}
+
+code {
+  white-space: pre-wrap;
+}

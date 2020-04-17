@@ -1,5 +1,9 @@
 defmodule Mebe2.Web.Server do
-  @files Raxx.Static.setup(source: Path.expand("priv/static"))
+  if Mix.env() == :prod do
+    @files Raxx.Static.setup(source: Path.expand("priv/static"))
+  else
+    @files [source: Path.expand("priv/static")]
+  end
 
   def child_spec(server_options) do
     {:ok, port} = Keyword.fetch(server_options, :port)

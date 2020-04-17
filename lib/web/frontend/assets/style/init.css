@@ -1,0 +1,6 @@
+*,
+*::before,
+*::after {
+  /* UGH */
+  box-sizing: border-box;
+}

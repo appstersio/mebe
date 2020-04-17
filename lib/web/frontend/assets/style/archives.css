@@ -1,0 +1,35 @@
+#archives-heading {
+  margin-top: 0;
+}
+
+#archives a {
+  color: var(--accent-link);
+}
+
+#archives ul {
+  list-style-position: inside;
+}
+
+#archives-year-list {
+  clear: both;
+  padding-left: 0;
+}
+
+.archives-month-list {
+  padding-left: 20px;
+}
+
+#archives-tags {
+  font-size: calc(var(--text-size-factor) * 2.5rem);
+  line-height: 75%;
+}
+
+.archives-tag {
+  display: block;
+  float: left;
+  margin: 0 2px;
+}
+
+#archives-tags + #archives-year-list {
+  padding-top: 20px;
+}

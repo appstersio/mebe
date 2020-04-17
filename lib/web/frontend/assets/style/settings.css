@@ -1,0 +1,120 @@
+:root {
+  /* Color Palette */
+
+  --background-color: #fff;
+
+  /* Accent color for differentiating special elements or layout "pop" */
+  --accent-text: #fcfcfe;
+  --accent-headings: var(--accent-text);
+  --accent-background: #3d4f5d;
+  --accent-link: #e9edee;
+  --accent-link-active: #dbe2e3;
+  --accent-link-visited: var(--accent-link);
+  --blog-name-color: #3d92c9;
+
+  /* Basic colors, the usual colors where others aren't appropriate */
+  --base-text: #000;
+  --base-headings: var(--base-text);
+  --base-background: var(--background-color);
+  --base-link: #51697c;
+  --base-link-visited: var(--base-link);
+  --disabled-color: #666;
+
+
+  /* Base layout */
+
+  --content-max-width: 1000px;
+  --layout-padding: 20px;
+  --main-grid: 'hd' 'mn' 1fr 'nav' 'ft' / auto;
+  --footer-direction: column;
+  --footer-item-margin: 5px;
+
+
+  /* Typography */
+
+  --font-size: 16px;
+  --font-size-big: 18px;
+  --font-headings: 'Trebuchet MS', 'Open Sans', 'Arial', sans-serif;
+  --font-body: 'Trebuchet MS', 'Open Sans', 'Arial', sans-serif;
+  --font-mono: monospace;
+
+  --code-background: #f2f2f2;
+
+  --h1-size: 3.000rem;
+  --h2-size: 2.369rem;
+  --h3-size: 1.777rem;
+  --h4-size: 1.333rem;
+  --h5-size: 1.222rem;
+  --h6-size: 1.111rem;
+
+  /* These allow tuning fonts to be even smaller or bigger on certain screen sizes. */
+  --h-size-factor: 0.65;
+  --text-size-factor: 0.9;
+
+  /* Button styles */
+  --btn-border-style: solid;
+  --btn-border-width: 2px;
+  --btn-border: var(--btn-border-width) var(--btn-border-style) var(--accent-background);
+  --btn-border-accent: var(--btn-border-width) var(--btn-border-style) var(--accent-link);
+  --btn-padding: 3px 5px;
+  --btn-border-radius: 3px;
+
+
+  /* Post list */
+
+  --viewing-info-background: #e1e7eb;
+
+
+  /* Pagination */
+
+  --pagination-link-radius: 5px;
+  --pagination-disabled-color: #888;
+
+
+  /* Post layout */
+  --post-meta-color: #4d4d4d;
+
+  /* Code should not enlargen mobile layouts, so remove 40px for padding. */
+  --code-block-max-width: calc(100vw - 20px * 2);
+
+  --youtube-height: 200px;
+}
+
+@media (min-width: 480px) {
+  :root {
+    --footer-direction: row;
+    --footer-item-margin: 0;
+
+    --h-size-factor: 0.85;
+    --text-size-factor: 0.95;
+    --youtube-height: 300px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --main-grid: 'hd    mn' 200px
+                 'nav   mn'
+                 'nav   ft'
+                 'nav   . '
+                / 250px auto;
+    
+    --h-size-factor: 1;
+    --text-size-factor: 1;
+
+    --code-block-max-width: 100%;
+    --youtube-height: 400px;
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --main-grid: 'hd    mn' 200px
+                 'nav   mn'
+                 'nav   ft'
+                 'nav   . '
+                / 325px auto;
+    
+    --youtube-height: 500px;
+  }
+}

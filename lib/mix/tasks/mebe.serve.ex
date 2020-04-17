@@ -4,14 +4,20 @@ defmodule Mix.Tasks.Mebe.Serve do
 
   @shortdoc "Start Mebe2 server and frontend development tools"
 
-  @deps ["mebe.clean"]
+  @deps ["mebe.build.frontend"]
 
   task _ do
-    frontend_path = Path.join([File.cwd!(), "lib", "web", "frontend"])
-
     [
-      exec(System.find_executable("bsb"), ["-w"], name: "ocaml", cd: frontend_path),
-      exec(System.find_executable("node"), ["fuse"], name: "fusebox", cd: frontend_path),
+      watch(
+        "Frontend TS",
+        Path.join([File.cwd!(), "lib", "web", "frontend", "src"]),
+        Mix.Tasks.Mebe.Build.Frontend
+      ),
+      watch(
+        "Frontend assets",
+        Path.join([File.cwd!(), "lib", "web", "frontend", "assets"]),
+        Mix.Tasks.Mebe.Build.Frontend
+      ),
       exec(System.find_executable("mix"), ["run", "--no-halt"])
     ]
     |> listen(watch: true)

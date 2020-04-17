@@ -1,0 +1,94 @@
+html {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template: var(--main-grid);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--base-background);
+}
+
+/* Blog header that also works as a sidebar on big screens */
+#main-header {
+  grid-area: hd;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  padding: var(--layout-padding);
+  background-color: var(--accent-background);
+}
+
+#main-header a {
+  color: var(--accent-link);
+}
+
+#main-header a:hover h1, #main-header a:visited {
+  color: var(--accent-link-active);
+}
+
+#main-header h1 {
+  color: var(--blog-name-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 2.1em;
+  margin: 20px 0 0;
+}
+
+#menunav ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#menunav ul li {
+  display: inline-block;
+  border: var(--btn-border-accent);
+  padding: var(--btn-padding);
+  border-radius: var(--btn-border-radius);
+}
+
+/* Archives and stuff in the sidebar */
+#main-sidebar {
+  grid-area: nav;
+  padding: var(--layout-padding);
+
+  background-color: var(--accent-background);
+  color: var(--accent-text);
+}
+
+/* Footer after all blog posts */
+#main-footer {
+  grid-area: ft;
+
+  padding: var(--layout-padding);
+  max-width: var(--content-max-width);
+
+  display: flex;
+  flex-direction: var(--footer-direction);
+  justify-content: space-between;
+  align-items: center;
+}
+
+#main-footer>p {
+  margin: var(--footer-item-margin);
+}
+
+/* Main blog post area */
+main {
+  grid-area: mn;
+
+  padding: var(--layout-padding);
+  max-width: var(--content-max-width);
+
+  /*
+    For some reason this fixes our code blocks in the posts, otherwise they will overflow the
+    container
+    Found on: https://stackoverflow.com/questions/45468633/pre-tag-causing-page-to-scroll-horizontally-in-css-grid#comment77898323_45468633
+  */
+  min-width: 0;
+}

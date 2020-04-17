@@ -1,16 +1,25 @@
-<div id="disqus_thread"></div>
+<div id="disqus_thread">
+  <noscript>
+    Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus</a>.
+  </noscript>
+</div>
 <script type="text/javascript" async>
   /* * * CONFIGURATION VARIABLES * * */
-  var disqus_shortname = "<%= Mebe2.get_conf(:disqus_shortname) %>";
-  var disqus_title = "<%= title %>";
+  const disqus_shortname = "<%= Mebe2.get_conf(:disqus_shortname) %>";
+  const disqus_title = "<%= title %>";
 
-  /* * * DON'T EDIT BELOW THIS LINE * * */
-  (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  const disqus_load_btn = document.createElement("button");
+  disqus_load_btn.id = "disqus_load_btn";
+  disqus_load_btn.type = "button";
+  disqus_load_btn.addEventListener("click", initDisqus);
+  disqus_load_btn.innerText = "Load Disqus comments";
+  document.getElementById("disqus_thread").appendChild(disqus_load_btn);
+
+  function initDisqus() {
+    disqus_load_btn.remove();
+
+    const dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+  }
 </script>
-<noscript>
-  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus</a>.
-</noscript>

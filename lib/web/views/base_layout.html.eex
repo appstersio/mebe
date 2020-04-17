@@ -16,10 +16,10 @@
       href="<%= Mebe2.get_conf(:absolute_url) %>/feed"
     />
   <% end %>
-  <link rel="stylesheet" href="<%= Mebe2.get_conf(:absolute_urL) %>/styles.css" />
+  <link rel="stylesheet" href="<%= Mebe2.get_conf(:absolute_url) %>/assets/style/index.css" />
 </head>
 <body>
-  <header>
+  <header id="main-header">
     <a aria-label="Click to open main page." href="<%= Mebe2.get_conf(:absolute_url) %>">
       <h1><%= Mebe2.get_conf(:blog_name) %></h1>
     </a>
@@ -40,11 +40,11 @@
     <%= __content__ %>
   </main>
 
-  <div class="sidebar">
+  <div id="main-sidebar">
     <%= Mebe2.Web.Views.Archives.html() %>
   </div>
 
-  <footer>
+  <footer id="main-footer">
     <p>
       © <%= Mebe2.get_conf(:blog_author) %>
     </p>
@@ -57,7 +57,7 @@
       <%= inspect(self()) %><span id="request-timer"></span>
     </p>
   </footer>
-  <script src="<%= Mebe2.get_conf(:absolute_url) %>/app.js"></script>
+  <script src="<%= Mebe2.get_conf(:absolute_url) %>/build/index.js" type="module"></script>
   <%= raw(Mebe2.get_conf(:extra_html)) %>
 </body>
 </html>

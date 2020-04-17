@@ -1,8 +1,8 @@
-<nav class="archives" aria-labelledby="archives-heading">
+<nav id="archives" aria-labelledby="archives-heading">
   <h3 id="archives-heading">Archives</h3>
 
   <%= with {max, tags} <- get_tags() do %>
-    <div class="archives-tags">
+    <div id="archives-tags">
       <%= for {tag, amount} <- tags do %>
         <a
           href="<%= Mebe2.get_conf(:absolute_url) %><%= Mebe2.Web.Views.Utils.get_tag_path(tag) %>"
@@ -16,7 +16,7 @@
   <% end %>
 
   <%= with [_|_] = years <- get_month_archives() do %>
-    <ul class="archives-year-list">
+    <ul id="archives-year-list">
       <%= for {year, months} <- years do %>
         <li>
           <a href="<%= Mebe2.Web.Views.Utils.year_path_generator(year).(1) %>">
