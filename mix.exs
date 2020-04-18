@@ -7,7 +7,15 @@ defmodule Mebe2.MixProject do
       version: "0.3.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      releases: [
+        mebe: [
+          steps: [:assemble, :tar],
+          config_providers: [
+            {Config.Reader, {:system, "MEBE_WORKING_DIR", "/config.prod.exs"}}
+          ]
+        ]
+      ]
     ]
   end
 

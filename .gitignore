@@ -30,3 +30,6 @@ mebe_2-*.tar
 
 # Built frontend assets
 /priv/static
+
+# Build machinery
+.vagrant

@@ -1,0 +1,3 @@
+[submodule "elixir-vagrant-setup"]
+	path = elixir-vagrant-setup
+	url = https://gitlab.com/Nicd/elixir-vagrant-setup.git
