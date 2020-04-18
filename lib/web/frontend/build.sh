@@ -6,7 +6,8 @@ set -o pipefail
 TARGETDIR=../../../priv/static
 
 tsc
+rm -rf ${TARGETDIR}
 mkdir -p ${TARGETDIR}
-cp -r assets/ ${TARGETDIR}/assets
-cp -r build/ ${TARGETDIR}/build
-cp -r vendor/ ${TARGETDIR}/build/vendor
+cp -r assets ${TARGETDIR}
+cp -r build ${TARGETDIR}
+cp -r vendor ${TARGETDIR}/build
